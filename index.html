@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <div>
+      <a href="http://feeds.feedburner.com/wscubetech/WtZe" title="Subscribe to my feed" rel="alternate" type="application/rss+xml"><img src="//feedburner.google.com/fb/images/pub/feed-icon32x32.png" alt="" style="border:0"/></a><a href="http://feeds.feedburner.com/wscubetech/WtZe" title="Subscribe to my feed" rel="alternate" type="application/rss+xml">Subscribe in a reader</a>
+
+  </div>
+   <div class="container">
+   	  <div class="image-container-description">
+        <div class="image-container">
+         <img src="images/Aashirvaad-atta.jpg">
+        </div>
+        <div class="description">
+           <p class="text">Aashirvaad Atta-Whole Wheat,10 kg Pouch</p>
+           <p class="pricetag" >Rs 399</p>
+           <p class="packsize">Pack Sizes</p><br>
+           <a href="#" class="select_product biggerprice selected-item" data-price="399">10kg<br><span>Rs 399</span></a>
+            <a href="#" class="select_product smallerprice" data-price="209">5kg<br><span>Rs 209</span></a>
+            <p class="quantity">Quantity:</p><br>
+            <div class="quantity-wrapper">
+              <span id="decrement">-</span>
+              <span id="quantity">1</span>
+              <span id="increment">+</span>
+              
+            </div>
+            <div class="payble_amt_wrap">
+              <a class="payable">Payable</a>
+              <a id="amt_show"><span>=</span>Rs.<span id="net_amt">399</span></a>
+            </div>
+        </div>
+   	  </div>
+   	  <div class="masala-container">
+         <div class="masala-section-first">
+          <div class="product-wrap">
+          <img src="images/masalasspices.jpg">
+        </div>
+          <p>Masalas,Spices & Cooking paste</p>
+         </div>
+         <div class="masala-section-second">
+           <div class="atta-flour ashirvaad">
+           <img src="images/atta.jpg">
+           <p>Atta & Flour</p>
+           </div>
+           <div class="rice-rice-product ashirvaad">
+             <img src="images/rice-flour.jpg">
+             <p>Rice & Rice Products</p>
+           </div>
+           <div class="dals-pulses ashirvaad">
+             <img src="images/dals&pulses.jpeg">
+             <p>Dals & Pulses</p>
+           </div>
+           <div class="cooking-oils ashirvaad">
+             <img src="images/cooking&oils.jpg">
+             <p>Cooking Oils</p>
+           </div>
+         </div>
+   	  </div>
+   </div>
+
+   <script type="text/javascript" src="jquery.min.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){
+
+
+      var big_base_price = 399;
+      var small_base_price = 209;
+
+      function decrement_price(){
+        var item_count = 0;
+        var quantity = parseInt($('#quantity').text());
+        if(quantity == 1){
+          return false;
+        }
+        else{
+          item_count = quantity - 1;
+          if($('.biggerprice').hasClass('selected-item')){
+            $('span#net_amt').text(big_base_price*item_count);
+          }
+          else{
+            $('span#net_amt').text(small_base_price*item_count);
+          }
+          
+        }
+        
+        $('#quantity').text(item_count);
+
+      }
+
+      function increment_price(){
+        
+        var item_count = 0;
+        var quantity = parseInt($('#quantity').text());
+          item_count = quantity + 1;
+           $('#quantity').text(item_count);
+           if($('.biggerprice').hasClass('selected-item')){
+            $('span#net_amt').text(big_base_price*item_count);
+          }
+          else{
+            $('span#net_amt').text(small_base_price*item_count);
+          }
+      }
+
+      $('#increment').on('click', function(e){
+        e.preventDefault();
+        increment_price();
+      });
+
+      $('#decrement').on('click', function(e){
+        e.preventDefault();
+        decrement_price();
+
+      });
+
+
+
+
+      $('.select_product').on('click', function(e){
+        e.preventDefault();
+        if($(this).hasClass('selected-item')){
+            return false;
+        }
+        else{
+          $('.select_product').removeClass('selected-item');
+          $(this).addClass('selected-item');
+          $('span#net_amt').text(parseInt($('.selected-item').attr('data-price')) * parseInt($('#quantity').text()));
+        }
+
+      });
+
+     });  
+   </script>
+</body>
+</html>
